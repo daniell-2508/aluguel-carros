@@ -12,6 +12,7 @@ export default function Pedidos() {
   const [form, setForm] = useState(vazio)
   const [editId, setEditId] = useState(null)
   const [msg, setMsg] = useState({ tipo: '', texto: '' })
+  const [aval, setAval] = useState(null)
 
   const carregar = () => api('/pedidos').then(setPedidos).catch((e) => setMsg({ tipo: 'erro', texto: e.message }))
   useEffect(() => { carregar(); api('/automoveis').then(setCarros).catch(() => {}) }, [])
@@ -35,14 +36,19 @@ export default function Pedidos() {
     setForm({ automovelId: p.automovelId, dataInicio: p.dataInicio, dataFim: p.dataFim, valorTotal: p.valorTotal })
   }
 
-  const avaliar = (p, aprovado) => {
-    const parecer = prompt('Parecer financeiro:') ?? ''
-    const body = { aprovado, parecer }
-    if (aprovado && perfil === 'BANCO' && confirm('Conceder contrato de crédito para este aluguel?')) {
-      body.valorFinanciado = Number(prompt('Valor financiado (R$):', p.valorTotal))
-      body.taxaJurosMensal = Number(prompt('Taxa de juros mensal (%):', '1.5'))
+  const abrirAvaliacao = (p) =>
+    setAval({ pedido: p, parecer: '', credito: false, valor: p.valorTotal, juros: '1.5' })
+
+  const avaliar = (aprovado) => {
+    const body = { aprovado, parecer: aval.parecer }
+    if (aprovado && aval.credito) {
+      body.valorFinanciado = Number(aval.valor)
+      body.taxaJurosMensal = Number(aval.juros)
     }
-    executar(() => api(`/pedidos/${p.id}/avaliacao`, { method: 'POST', body }), 'Pedido avaliado.')
+    executar(async () => {
+      await api(`/pedidos/${aval.pedido.id}/avaliacao`, { method: 'POST', body })
+      setAval(null)
+    }, aprovado ? 'Pedido aprovado.' : 'Pedido reprovado.')
   }
 
   return (
@@ -65,8 +71,7 @@ export default function Pedidos() {
                 <td className="acoes">
                   {p.status === 'EM_ANALISE' && <button onClick={() => editar(p)}>Modificar</button>}
                   {!ehCliente && p.status === 'EM_ANALISE' && (<>
-                    <button onClick={() => avaliar(p, true)}>Aprovar</button>
-                    <button className="perigo" onClick={() => avaliar(p, false)}>Reprovar</button></>)}
+                    <button onClick={() => abrirAvaliacao(p)}>Avaliar</button></>)}
                   {!ehCliente && p.status === 'APROVADO' && (
                     <button onClick={() => executar(() => api(`/pedidos/${p.id}/contrato`, { method: 'POST' }), 'Contrato executado.')}>Executar contrato</button>)}
                   {['EM_ANALISE', 'APROVADO'].includes(p.status) && (
@@ -78,6 +83,38 @@ export default function Pedidos() {
           </tbody>
         </table>
       </div>
+
+      {aval && (
+        <div className="card">
+          <h2>Avaliar pedido #{aval.pedido.id} ({aval.pedido.clienteNome})</h2>
+          <label>Parecer financeiro</label>
+          <textarea rows="2" value={aval.parecer} onChange={(e) => setAval({ ...aval, parecer: e.target.value })} />
+          {perfil === 'BANCO' && (
+            <>
+              <label style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <input type="checkbox" style={{ width: 'auto' }} checked={aval.credito}
+                       onChange={(e) => setAval({ ...aval, credito: e.target.checked })} />
+                Conceder contrato de crédito
+              </label>
+              {aval.credito && (
+                <div className="linha">
+                  <div><label>Valor financiado (R$)</label>
+                    <input type="number" min="0.01" step="0.01" value={aval.valor}
+                           onChange={(e) => setAval({ ...aval, valor: e.target.value })} /></div>
+                  <div><label>Juros mensais (%)</label>
+                    <input type="number" min="0" step="0.01" value={aval.juros}
+                           onChange={(e) => setAval({ ...aval, juros: e.target.value })} /></div>
+                </div>
+              )}
+            </>
+          )}
+          <p className="acoes">
+            <button onClick={() => avaliar(true)}>Aprovar</button>
+            <button className="perigo" onClick={() => avaliar(false)}>Reprovar</button>
+            <button className="sec" onClick={() => setAval(null)}>Fechar</button>
+          </p>
+        </div>
+      )}
 
       {(ehCliente || editId) && (
         <div className="card">
