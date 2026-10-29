@@ -1,0 +1,25 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; margin: 0; background: #f4f6f8; color: #222; }
+.topo { display: flex; gap: 24px; align-items: center; padding: 12px 24px; background: #1d3557; color: #fff; flex-wrap: wrap; }
+.topo nav { display: flex; gap: 16px; flex: 1; }
+.topo a { color: #cfe0f5; text-decoration: none; }
+.topo a.active { color: #fff; font-weight: 600; border-bottom: 2px solid #fff; }
+main { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
+.card { background: #fff; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; box-shadow: 0 1px 3px #0002; }
+.auth { max-width: 420px; margin: 48px auto; }
+h1, h2 { margin-top: 0; }
+label { display: block; font-size: 14px; margin: 10px 0 4px; }
+input, select, textarea { width: 100%; padding: 8px; border: 1px solid #bbb; border-radius: 4px; font: inherit; }
+button { padding: 7px 14px; border: 0; border-radius: 4px; background: #1d3557; color: #fff; cursor: pointer; font: inherit; }
+button.sec { background: #6c757d; }
+button.perigo { background: #c0392b; }
+button:disabled { opacity: .5; cursor: default; }
+.linha { display: flex; gap: 12px; } .linha > * { flex: 1; }
+.acoes { display: flex; gap: 6px; flex-wrap: wrap; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #e3e3e3; vertical-align: top; }
+.erro { background: #fdecea; color: #a12622; padding: 8px 12px; border-radius: 4px; margin: 10px 0; }
+.ok { background: #e6f4ea; color: #1e6b34; padding: 8px 12px; border-radius: 4px; margin: 10px 0; }
+.badge { padding: 2px 8px; border-radius: 10px; font-size: 12px; background: #ddd; }
+.badge.EM_ANALISE { background: #fff3cd; } .badge.APROVADO { background: #d1ecf1; }
+.badge.REPROVADO, .badge.CANCELADO { background: #f8d7da; } .badge.CONTRATADO { background: #d4edda; }
