@@ -336,6 +336,14 @@ serve -s frontend/dist
 
 ![Pedido contratado](docs/img/06-contratado.png)
 
+**7. Banco de dados (Supabase):** tabelas criadas pela aplicação no PostgreSQL.
+
+![Tabelas no Supabase](docs/img/07-supabase-tabelas.png)
+
+**8. Dados gravados no Supabase:** tabela `automoveis` com o veículo cadastrado pela aplicação.
+
+![Automóveis no Supabase](docs/img/08-supabase-automoveis.png)
+
 ### 💻 Exemplo de Saída no Terminal (API)
 
 ```bash
