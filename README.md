@@ -302,12 +302,13 @@ serve -s frontend/dist
 └── /docs
     ├── modelagem.md             # 📚 Diagramas UML e histórias de usuário.
     └── /img                     # 🖼️ Capturas de tela do sistema.
+```
 
 ---
 
 ## 🎥 Demonstração
 
-> Capturas de tela: 
+> Capturas de tela do protótipo em funcionamento.
 
 ### 🖼️ Telas do sistema
 
