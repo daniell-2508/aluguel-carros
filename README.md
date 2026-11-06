@@ -1,4 +1,4 @@
-# 🚗 Sistema de Aluguel de Carros 👨‍💻
+﻿# 🚗 Sistema de Aluguel de Carros 👨‍💻
 
 > [!NOTE]
 > Sistema web para **efetuar, modificar, consultar, cancelar e avaliar pedidos de aluguel de automóveis**, com login obrigatório para clientes, empresas e bancos.
@@ -300,14 +300,40 @@ serve -s frontend/dist
 │       └── /test/java           # 🧪 Testes de integração.
 │
 └── /docs
-    └── modelagem.md             # 📚 Diagramas UML e histórias de usuário.
-```
+    ├── modelagem.md             # 📚 Diagramas UML e histórias de usuário.
+    └── /img                     # 🖼️ Capturas de tela do sistema.
 
 ---
 
 ## 🎥 Demonstração
 
-> Capturas de tela: _adicionar em `docs/img/` e referenciar aqui após a apresentação._
+> Capturas de tela: 
+
+### 🖼️ Telas do sistema
+
+**1. Login:** acesso restrito a usuários cadastrados.
+
+![Login](docs/img/01-login.png)
+
+**2. Cadastro de cliente:** RG, CPF, nome, endereço, profissão e até 3 rendimentos.
+
+![Cadastro de cliente](docs/img/02-cadastro.png)
+
+**3. Automóveis:** gestão da frota pelos agentes.
+
+![Automóveis](docs/img/03-automoveis.png)
+
+**4. Pedido criado:** o cliente acompanha o status (`EM ANALISE`).
+
+![Pedido em análise](docs/img/04-pedido-criado.png)
+
+**5. Avaliação:** o banco emite o parecer financeiro e concede o contrato de crédito.
+
+![Avaliação pelo banco](docs/img/05-avaliacao.png)
+
+**6. Pedido contratado:** status `CONTRATADO`, com o parecer e o crédito concedido.
+
+![Pedido contratado](docs/img/06-contratado.png)
 
 ### 💻 Exemplo de Saída no Terminal (API)
 

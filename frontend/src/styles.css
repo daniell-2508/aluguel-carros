@@ -1,4 +1,5 @@
 * { box-sizing: border-box; }
+:root { color-scheme: light; }
 body { font-family: system-ui, sans-serif; margin: 0; background: #f4f6f8; color: #222; }
 .topo { display: flex; gap: 24px; align-items: center; padding: 12px 24px; background: #1d3557; color: #fff; flex-wrap: wrap; }
 .topo nav { display: flex; gap: 16px; flex: 1; }
@@ -9,7 +10,7 @@ main { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
 .auth { max-width: 420px; margin: 48px auto; }
 h1, h2 { margin-top: 0; }
 label { display: block; font-size: 14px; margin: 10px 0 4px; }
-input, select, textarea { width: 100%; padding: 8px; border: 1px solid #bbb; border-radius: 4px; font: inherit; }
+input, select, textarea { width: 100%; padding: 8px; border: 1px solid #bbb; border-radius: 4px; font: inherit; background: #fff; color: #222; }
 button { padding: 7px 14px; border: 0; border-radius: 4px; background: #1d3557; color: #fff; cursor: pointer; font: inherit; }
 button.sec { background: #6c757d; }
 button.perigo { background: #c0392b; }
